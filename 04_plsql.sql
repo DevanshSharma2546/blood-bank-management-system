@@ -1,14 +1,11 @@
--- ============================================================
 -- BLOOD BANK MANAGEMENT SYSTEM
 -- PL/SQL Components: Procedures, Functions, Triggers, Cursors
 -- Oracle SQL Syntax
--- ============================================================
 
--- ============================================================
 -- 1. STORED PROCEDURE: Process Blood Transfer
 --    Transfers blood from one hospital to another,
 --    updates inventory, logs the transfer, and commits.
--- ============================================================
+
 CREATE OR REPLACE PROCEDURE ProcessBloodTransfer (
     p_from_hospital  IN INT,
     p_to_hospital    IN INT,
@@ -71,10 +68,9 @@ END ProcessBloodTransfer;
 /
 
 
--- ============================================================
 -- 2. STORED PROCEDURE: Approve Blood Request
 --    Checks compatibility, verifies stock, approves request.
--- ============================================================
+    
 CREATE OR REPLACE PROCEDURE ApproveBloodRequest (
     p_request_id  IN INT
 )
@@ -127,10 +123,9 @@ END ApproveBloodRequest;
 /
 
 
--- ============================================================
 -- 3. FUNCTION: Check Blood Compatibility
 --    Returns 'YES' if donor_group can donate to receiver_group.
--- ============================================================
+
 CREATE OR REPLACE FUNCTION CheckCompatibility (
     p_donor_group    IN VARCHAR2,
     p_receiver_group IN VARCHAR2
@@ -158,9 +153,8 @@ END CheckCompatibility;
 -- SELECT CheckCompatibility('O-', 'AB+') FROM DUAL;
 
 
--- ============================================================
 -- 4. FUNCTION: Get Total Stock for Blood Group Across Network
--- ============================================================
+
 CREATE OR REPLACE FUNCTION GetNetworkStock (
     p_blood_group IN VARCHAR2
 ) RETURN INT
@@ -182,10 +176,9 @@ END GetNetworkStock;
 /
 
 
--- ============================================================
 -- 5. TRIGGER: Auto-update BloodInventory after TransferLog INSERT
 --    Deducts quantity from source hospital automatically.
--- ============================================================
+
 CREATE OR REPLACE TRIGGER trg_UpdateInventoryOnTransfer
 AFTER INSERT ON TransferLog
 FOR EACH ROW
@@ -212,9 +205,8 @@ END trg_UpdateInventoryOnTransfer;
 /
 
 
--- ============================================================
 -- 6. TRIGGER: Prevent negative inventory
--- ============================================================
+
 CREATE OR REPLACE TRIGGER trg_PreventNegativeStock
 BEFORE UPDATE ON BloodInventory
 FOR EACH ROW
@@ -227,10 +219,8 @@ BEGIN
 END trg_PreventNegativeStock;
 /
 
-
--- ============================================================
 -- 7. TRIGGER: Auto-timestamp on BloodRequest insert
--- ============================================================
+    
 CREATE OR REPLACE TRIGGER trg_SetRequestDate
 BEFORE INSERT ON BloodRequest
 FOR EACH ROW
@@ -244,11 +234,9 @@ BEGIN
 END trg_SetRequestDate;
 /
 
-
--- ============================================================
 -- 8. CURSOR: Generate Low Stock Report
 --    Lists all blood groups with quantity < threshold.
--- ============================================================
+
 CREATE OR REPLACE PROCEDURE GenerateLowStockReport (
     p_threshold IN INT DEFAULT 10
 )
@@ -292,11 +280,9 @@ EXCEPTION
 END GenerateLowStockReport;
 /
 
-
--- ============================================================
 -- 9. CURSOR: Remove expired blood units
 --    (Uses expiry_date column if added to BloodInventory)
--- ============================================================
+
 CREATE OR REPLACE PROCEDURE RemoveExpiredBlood
 AS
     CURSOR exp_cursor IS
@@ -327,11 +313,9 @@ EXCEPTION
 END RemoveExpiredBlood;
 /
 
-
--- ============================================================
 -- 10. TRANSACTION MANAGEMENT EXAMPLE
 --     Full atomic transaction: Request → Compatibility Check → Approve
--- ============================================================
+    
 DECLARE
     v_request_id    INT := 1004;
     v_hospital_id   INT;
