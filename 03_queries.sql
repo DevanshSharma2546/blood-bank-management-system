@@ -1,8 +1,6 @@
 -- BLOOD BANK MANAGEMENT SYSTEM
 -- Advanced SQL Queries - Joins, Subqueries, Aggregates, Views
 
--- SECTION 1: JOIN QUERIES
-
 -- Q1: List all hospitals with their blood inventory details
 SELECT 
     H.hospital_id,
@@ -113,8 +111,6 @@ JOIN BloodInventory BI
     AND BR.blood_group = BI.blood_group
 WHERE BR.status = 'Pending'
   AND BI.quantity >= BR.requested_quantity;
-
--- SECTION 3: AGGREGATE FUNCTIONS + GROUP BY + HAVING
 
 -- Q10: Total blood demand per blood group
 SELECT 
