@@ -19,3 +19,4 @@
 
 - **Analytical Reporting for Hospital Networks**  
   SQL queries generate insights such as blood stock availability, demand trends, and hospital-level usage statistics.
+  
