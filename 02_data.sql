@@ -1,11 +1,8 @@
--- ============================================================
 -- BLOOD BANK MANAGEMENT SYSTEM
 -- DML - Sample Data Insertion
--- ============================================================
 
--- ============================================================
 -- INSERT: BloodCompatibility (universal rules)
--- ============================================================
+
 INSERT INTO BloodCompatibility VALUES ('O-',  'O-');
 INSERT INTO BloodCompatibility VALUES ('O-',  'O+');
 INSERT INTO BloodCompatibility VALUES ('O-',  'A-');
@@ -34,18 +31,16 @@ INSERT INTO BloodCompatibility VALUES ('AB-', 'AB-');
 INSERT INTO BloodCompatibility VALUES ('AB-', 'AB+');
 INSERT INTO BloodCompatibility VALUES ('AB+', 'AB+');
 
--- ============================================================
 -- INSERT: Hospitals
--- ============================================================
+
 INSERT INTO Hospital VALUES (1, 'AIIMS Delhi',          'New Delhi',   '9810001111', 'aiims@delhi.gov.in');
 INSERT INTO Hospital VALUES (2, 'PGI Chandigarh',       'Chandigarh',  '9810002222', 'pgi@chd.gov.in');
 INSERT INTO Hospital VALUES (3, 'Fortis Mohali',        'Mohali',      '9810003333', 'fortis@mohali.com');
 INSERT INTO Hospital VALUES (4, 'Apollo Ludhiana',      'Ludhiana',    '9810004444', 'apollo@ldh.com');
 INSERT INTO Hospital VALUES (5, 'Max Superspecialty',   'Bathinda',    '9810005555', 'max@bathinda.com');
 
--- ============================================================
 -- INSERT: BloodInventory
--- ============================================================
+
 -- Hospital 1 - AIIMS Delhi
 INSERT INTO BloodInventory VALUES (101, 1, 'A+',  45, CURDATE());
 INSERT INTO BloodInventory VALUES (102, 1, 'A-',  10, CURDATE());
@@ -83,9 +78,8 @@ INSERT INTO BloodInventory VALUES (501, 5, 'A+',  10, CURDATE());
 INSERT INTO BloodInventory VALUES (502, 5, 'B+',  12, CURDATE());
 INSERT INTO BloodInventory VALUES (503, 5, 'O+',  18, CURDATE());
 
--- ============================================================
 -- INSERT: BloodRequests
--- ============================================================
+
 INSERT INTO BloodRequest VALUES (1001, 3, 'O-',  10, DATE_SUB(CURDATE(), INTERVAL 5 DAY),  'Approved');
 INSERT INTO BloodRequest VALUES (1002, 4, 'AB+',  5, DATE_SUB(CURDATE(), INTERVAL 4 DAY),  'Approved');
 INSERT INTO BloodRequest VALUES (1003, 5, 'B-',   8, DATE_SUB(CURDATE(), INTERVAL 3 DAY),  'Pending');
@@ -95,9 +89,8 @@ INSERT INTO BloodRequest VALUES (1006, 5, 'AB-',  6, CURDATE(),                 
 INSERT INTO BloodRequest VALUES (1007, 4, 'O-',  15, CURDATE(),                            'Rejected');
 INSERT INTO BloodRequest VALUES (1008, 2, 'B+',  30, CURDATE(),                            'Pending');
 
--- ============================================================
 -- INSERT: TransferLog
--- ============================================================
+
 INSERT INTO TransferLog VALUES (2001, 1, 3, 'O-',  10, DATE_SUB(CURDATE(), INTERVAL 5 DAY));
 INSERT INTO TransferLog VALUES (2002, 1, 4, 'AB+',  5, DATE_SUB(CURDATE(), INTERVAL 4 DAY));
 INSERT INTO TransferLog VALUES (2003, 2, 5, 'O+',  20, DATE_SUB(CURDATE(), INTERVAL 1 DAY));
