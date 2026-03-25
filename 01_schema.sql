@@ -1,9 +1,5 @@
--- ============================================================
 -- BLOOD BANK MANAGEMENT SYSTEM
 -- DDL - Schema Creation
--- Thapar Institute of Engineering and Technology, Patiala
--- ============================================================
-
 -- Drop tables if they exist (in reverse FK order)
 DROP TABLE IF EXISTS TransferLog;
 DROP TABLE IF EXISTS BloodRequest;
@@ -11,9 +7,8 @@ DROP TABLE IF EXISTS BloodInventory;
 DROP TABLE IF EXISTS BloodCompatibility;
 DROP TABLE IF EXISTS Hospital;
 
--- ============================================================
 -- TABLE 1: Hospital
--- ============================================================
+
 CREATE TABLE Hospital (
     hospital_id     INT PRIMARY KEY,
     hospital_name   VARCHAR(100) NOT NULL,
@@ -23,9 +18,8 @@ CREATE TABLE Hospital (
     CONSTRAINT chk_contact CHECK (LENGTH(contact_number) >= 10)
 );
 
--- ============================================================
 -- TABLE 2: BloodInventory
--- ============================================================
+
 CREATE TABLE BloodInventory (
     inventory_id    INT PRIMARY KEY,
     hospital_id     INT NOT NULL,
@@ -37,9 +31,8 @@ CREATE TABLE BloodInventory (
     CONSTRAINT chk_quantity     CHECK (quantity >= 0)
 );
 
--- ============================================================
 -- TABLE 3: BloodRequest
--- ============================================================
+
 CREATE TABLE BloodRequest (
     request_id          INT PRIMARY KEY,
     hospital_id         INT NOT NULL,
@@ -53,9 +46,8 @@ CREATE TABLE BloodRequest (
     CONSTRAINT chk_status       CHECK (status IN ('Pending','Approved','Rejected'))
 );
 
--- ============================================================
 -- TABLE 4: TransferLog
--- ============================================================
+
 CREATE TABLE TransferLog (
     transfer_id         INT PRIMARY KEY,
     from_hospital_id    INT NOT NULL,
@@ -70,9 +62,8 @@ CREATE TABLE TransferLog (
     CONSTRAINT chk_diff_hosp    CHECK (from_hospital_id <> to_hospital_id)
 );
 
--- ============================================================
 -- TABLE 5: BloodCompatibility
--- ============================================================
+
 CREATE TABLE BloodCompatibility (
     donor_group     VARCHAR(3) NOT NULL,
     receiver_group  VARCHAR(3) NOT NULL,
@@ -81,9 +72,8 @@ CREATE TABLE BloodCompatibility (
     CONSTRAINT chk_receiver_grp CHECK (receiver_group IN ('A+','A-','B+','B-','AB+','AB-','O+','O-'))
 );
 
--- ============================================================
 -- INDEXES for performance
--- ============================================================
+
 CREATE INDEX idx_inv_hospital    ON BloodInventory(hospital_id);
 CREATE INDEX idx_inv_bloodgroup  ON BloodInventory(blood_group);
 CREATE INDEX idx_req_hospital    ON BloodRequest(hospital_id);
