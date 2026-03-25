@@ -1,11 +1,7 @@
--- ============================================================
 -- BLOOD BANK MANAGEMENT SYSTEM
 -- Advanced SQL Queries - Joins, Subqueries, Aggregates, Views
--- ============================================================
 
--- ============================================================
 -- SECTION 1: JOIN QUERIES
--- ============================================================
 
 -- Q1: List all hospitals with their blood inventory details
 SELECT 
@@ -69,9 +65,7 @@ JOIN Hospital H ON BI.hospital_id = H.hospital_id
 WHERE BC.donor_group = 'O-'
 ORDER BY H.hospital_name;
 
--- ============================================================
 -- SECTION 2: SUBQUERIES
--- ============================================================
 
 -- Q6: Hospitals that have never made a blood request
 SELECT hospital_id, hospital_name, location
@@ -120,9 +114,7 @@ JOIN BloodInventory BI
 WHERE BR.status = 'Pending'
   AND BI.quantity >= BR.requested_quantity;
 
--- ============================================================
 -- SECTION 3: AGGREGATE FUNCTIONS + GROUP BY + HAVING
--- ============================================================
 
 -- Q10: Total blood demand per blood group
 SELECT 
@@ -178,9 +170,7 @@ JOIN Hospital H ON BR.hospital_id = H.hospital_id
 GROUP BY H.hospital_name
 ORDER BY total_requests DESC;
 
--- ============================================================
 -- SECTION 4: VIEWS
--- ============================================================
 
 -- View 1: Monthly blood usage
 CREATE OR REPLACE VIEW MonthlyBloodUsage AS
@@ -245,9 +235,7 @@ FROM TransferLog TL
 JOIN Hospital H1 ON TL.from_hospital_id = H1.hospital_id
 JOIN Hospital H2 ON TL.to_hospital_id   = H2.hospital_id;
 
--- ============================================================
 -- SECTION 5: DML - UPDATE & DELETE EXAMPLES
--- ============================================================
 
 -- Update: Approve a pending request
 UPDATE BloodRequest
